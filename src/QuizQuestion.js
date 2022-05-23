@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import QuizQuestionButton from "./QuizQuestionButton.js";
+import QuizQuestionButton from "./QuizQuestionButton";
 
 class QuizQuestion extends Component {
   constructor(props) {
@@ -7,8 +7,8 @@ class QuizQuestion extends Component {
 
     this.state = { incorrectAnswer: false };
   }
-  handleClick(buttonText) {
-    if (buttonText === this.props.quiz_question.answer) {
+  handleClick(button_text) {
+    if (button_text === this.props.quiz_question.answer) {
       this.setState({ incorrectAnswer: false });
       this.props.showNextQuestionHandler();
     } else {
@@ -23,17 +23,15 @@ class QuizQuestion extends Component {
         </section>
         <section className="buttons">
           <ul>
-            {this.props.quiz_question.answer_options.map(
-              (answer_option, index) => {
-                return (
-                  <QuizQuestionButton
-                    key={index}
-                    button_text={answer_option}
-                    clickHandler={this.handleClick.bind(this)}
-                  />
-                );
-              }
-            )}
+            {this.props.quiz_question.answer_options.map((answer, index) => {
+              return (
+                <QuizQuestionButton
+                  button_text={answer}
+                  key={index}
+                  clickHandler={this.handleClick.bind(this)}
+                />
+              );
+            })}
           </ul>
         </section>
         {this.state.incorrectAnswer ? (
